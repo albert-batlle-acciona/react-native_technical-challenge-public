@@ -24,5 +24,8 @@ export interface Vehicle {
   batteryLevel: number
   autonomy: number
   position: Position
+  booked: boolean
+  lastBookingFinishedAt?: string
+
 }
 

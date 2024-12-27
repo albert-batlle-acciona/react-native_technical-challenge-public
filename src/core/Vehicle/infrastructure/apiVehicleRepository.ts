@@ -21,6 +21,17 @@ export const apiVehicleRepository = ({}: {}): VehicleRepository => {
       } catch (error: any) {
         throw { code: error.code, message: error.message }
       }
+    },
+    getById: async (id: number): Promise<Vehicle[]> => {
+      try {
+        const response: Promise<VehicleDTO[]> = new Promise((resolve, reject) => {
+          const data = simulateFetchResponse(vehiclesData)
+          resolve(data)
+        })
+        return vehiclesSerializer.parse(await response).filter(vehicle => vehicle.id === id)
+      } catch (error: any) {
+        throw { code: error.code, message: error.message }
+      }
     }
   }
 }

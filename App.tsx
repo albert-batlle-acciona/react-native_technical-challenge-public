@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useCallback, useRef } from 'react'
 import { StatusBar } from 'expo-status-bar'
-import { StyleSheet, View } from 'react-native'
+import { StyleSheet, View, Text } from 'react-native'
 import { Map } from './src/ui/components/MapView/MapView'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import { registerModules } from './src/_di/registerModules'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import BottomSheet, { BottomSheetView } from '@gorhom/bottom-sheet'
 
 export default function App() {
   registerModules()

@@ -1,12 +1,14 @@
 import { isEmpty, isUndefined } from 'core/shared/domain/utils'
 import { Vehicle } from 'core/Vehicle/domain/Vehicle'
 
-import { Pressable, Image } from 'react-native'
+import { Pressable, Image, Button } from 'react-native'
 import { Callout, Marker } from 'react-native-maps'
 import { styles } from '../MapView.styles'
 import { MOTORBIKE, SELECTED_MOTORBIKE } from 'src/assets'
 import { MutableRefObject } from 'react'
 import { BottomSheetMethods } from '@gorhom/bottom-sheet/lib/typescript/types'
+import { Text } from 'react-native'
+import React from 'react'
 
 interface Props {
     vehicles: Vehicle[],
@@ -33,14 +35,16 @@ export const VehicleMarker = ({
         setIsLoading(true)
         setVehicle(vehicles![vehicleIndex])
         setSelectedVehicle(vehicleIndex)
+        console.log('selectedVehicle', selectedVehicle)
+        console.log('bottomSheetRef', bottomSheetRef.current)
+        bottomSheetRef.current.expand()
         setTimeout(() => setIsLoading(false), 400)
     }
+
     return (
         <>
-            {!isEmpty(vehicles) && !isUndefined(vehicles) && vehicles?.map((vehicle: Vehicle, index: number) => {
-                return (<Pressable key={index} onPress={() => {
-                    bottomSheetRef?.current?.expand()
-                }}>
+            {!isEmpty(vehicles) && !isUndefined(vehicles) && vehicles?.filter(v => !v.lastBookingFinishedAt).map((vehicle: Vehicle, index: number) => {
+                return (
                     <Marker
                         title={vehicle.customId}
                         onSelect={(event) => loadVehicle(index, event)}
@@ -53,7 +57,7 @@ export const VehicleMarker = ({
                         />
                         <Callout tooltip />
                     </Marker>
-                </Pressable>)
+                )
             }
             )}
         </>

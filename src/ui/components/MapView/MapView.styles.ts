@@ -12,10 +12,11 @@ export const styles = StyleSheet.create({
     map: {
         width: '100%',
         height: '100%',
-        zIndex: 9,
+        zIndex: 0,
     },
     containerBottomSheet: {
         width: '94%',
+        height: '40%',
         marginLeft: '3%',
         borderRadius: 30,
         overflow: 'hidden',
